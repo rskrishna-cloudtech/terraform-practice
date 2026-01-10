@@ -1,0 +1,71 @@
+# Create Security group with rules.
+# Inbound - Allow everything or only the port 22 for SSh connection.
+# Outbounf - Allow everything.
+
+resource "aws_security_group" "Allow_SSH" {
+  name        = var.sg_name
+  description = var.sg_description
+
+  ingress = {
+    from_port   = var.ssh_port
+    to_port     = var.ssh_port
+    protocol    = var.protocol
+    cide_blocks = var.cidr_blocks
+  }
+
+  egress = {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = var.cidr_blocks
+  }
+
+  tags = {
+    Name      = "allow_ssh"
+    CreatedBy = "Siva Krishna"
+  }
+
+}
+
+# Creating an EC2 instance.
+resource "aws_instance" "db_instance" {
+  # count = length(var.instance_names)
+
+  # Getting the value by looping through the map defined in the variable.tf.
+  ami                    = data.aws_ami.ami_id.id
+  vpc_security_group_ids = [aws_security_group.Allow_SSH.id]
+  # instance_type          = var.instance_names[count.index] == "frontend" ? "t2.micro" : "t3.medium"
+  # Getting the instance type from the for-each loop.
+  # instance_type = each.value
+  instance_type = lookup(var.instance_type, terraform.workspace)
+  # instance_type          = local.instance_type
+  tags = merge(
+    var.instance_tags,
+    {
+      # Getting the name from for-each loop.
+      Name        = "${each.key}"
+      Module      = "${each.key}"
+      Environment = var.environment
+    }
+  )
+
+  # Provisioners will run when the resources are getting created.
+  # remote provisioner to connect to the instance and install the nginx application and start the service.
+  connection {
+    type     = "ssh"
+    user     = "ec2-user"
+    password = "DevOps321"
+    host     = self.private_ip
+  }
+
+  # remote provisioner to install the ansible and then run the ansible-playbook to install the nginx once the instance is created.
+  provisioner "remote-exec" {
+    inline = [ 
+      "sudo dnf install ansible -y",
+      "ansible-playbook -i private-ips.txt nginx.yml",
+      "sudo systemctl start nginx"
+     ]
+  }
+}
+
+

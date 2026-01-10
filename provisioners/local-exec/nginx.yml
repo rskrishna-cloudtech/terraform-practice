@@ -1,0 +1,7 @@
+- name: install nginx via terraform provisioners - local-exec
+  hosts: all
+  tasks:
+  - name: Install the nginx
+    ansible.builtin.dnf:
+      name: nginx
+      state: latest
