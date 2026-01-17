@@ -71,7 +71,7 @@ variable "cidr_blocks" {
 
 # Variable to store the list of sg details to open the mutliple ports for inbound.
 variable "inbound_rules" {
-  type = list(any)
+  type = list
   default = [
     {
       port         = 22

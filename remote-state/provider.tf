@@ -10,7 +10,7 @@ terraform {
     bucket = "<s3-bucket-name>"
     key = "<remote-state-file-name>"
     region = "us-east-1"
-    dynamodb_table = "<dynamoDB>"
+    dynamodb_table = "<dynamoDB-table-name>"
   }
 }
 

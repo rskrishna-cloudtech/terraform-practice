@@ -38,7 +38,7 @@ variable "igw_tags" {
   default = {}
 }
 
-# Variable to store the subnets cidr blocks.
+# Variable to store the public subnets cidr blocks.
 variable "public_subnet_cidrs" {
   type = list(any)
 
@@ -50,6 +50,85 @@ variable "public_subnet_cidrs" {
 
 # Variable to store the public subnet cidr tags.
 variable "public_subnet_cidr_tags" {
+  type    = map(any)
+  default = {}
+}
+
+# Variable to store the private subnets cidr blocks.
+variable "private_subnet_cidrs" {
+  type = list(any)
+
+  validation {
+    condition     = length(var.private_subnet_cidrs) == 2
+    error_message = "Please provide valid private subnet CIDR "
+  }
+}
+
+# Variable to store the private subnet cidr tags.
+variable "private_subnet_cidr_tags" {
+  type    = map(any)
+  default = {}
+}
+
+# Variable to store the database subnets cidr blocks.
+variable "database_subnet_cidrs" {
+  type = list(any)
+
+  validation {
+    condition     = length(var.database_subnet_cidrs) == 2
+    error_message = "Please provide valid database subnet CIDR "
+  }
+}
+
+# Variable to store the database subnet cidr tags.
+variable "database_subnet_cidr_tags" {
+  type    = map(any)
+  default = {}
+}
+
+# Variable to store the database subnet group tags.
+variable "database_subnet_group_tags" {
+  type    = map(any)
+  default = {}
+}
+
+# Variable to store the nat gatway tags.
+variable "nat_gateway_tags" {
+  type    = map(any)
+  default = {}
+}
+
+# Variable to store the public route table tags.
+variable "public_route_table_tags" {
+  type    = map(any)
+  default = {}
+}
+
+# Variable to store the private route table tags.
+variable "private_route_table_tags" {
+  type    = map(any)
+  default = {}
+}
+
+# Variable to store the database route table tags.
+variable "database_route_table_tags" {
+  type    = map(any)
+  default = {}
+}
+
+# Variable to store the peering required or not flag.
+variable "is_peering_required" {
+  type    = bool
+  default = false
+}
+
+# Variable to store the target VPC id for peering.
+variable "acceptor_vpc_id" {
+  type    = string
+  default = ""
+}
+
+variable "vpc_peering_tags" {
   type    = map(any)
   default = {}
 }
