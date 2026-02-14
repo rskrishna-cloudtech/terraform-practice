@@ -6,14 +6,14 @@ resource "aws_security_group" "Allow_SSH" {
   name        = "Allow_SSH"
   description = "Allowing SSH access"
 
-  ingress = {
+  ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cide_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
-  egress = {
+  egress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
@@ -29,12 +29,13 @@ resource "aws_security_group" "Allow_SSH" {
 
 # Creating an EC2 instance.
 resource "aws_instance" "db_instance" {
-  ami                    = "ami-090252cbe067a9e58"
+  ami                    = "ami-0220d79f3f480ecf5"
   vpc_security_group_ids = [aws_security_group.Allow_SSH.id]
-  instance_type          = "t2.micro"
+  instance_type          = "t3.micro"
 
   tags = {
-    Name = "db"
+    Name    = "db"
+    Created = "Siva Krishna"
   }
 }
 
