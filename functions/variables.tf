@@ -14,8 +14,8 @@ variable "image_id" {
 
 # Variable to store the instance type.
 variable "instance_type" {
-  type = string
-  # default     = "t2.micro"
+  type        = string
+  default     = ""
   description = "The instance type for the EC2 instance"
 }
 

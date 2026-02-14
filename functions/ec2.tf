@@ -6,14 +6,14 @@ resource "aws_security_group" "Allow_SSH" {
   name        = var.sg_name
   description = var.sg_description
 
-  ingress = {
+  ingress {
     from_port   = var.ssh_port
     to_port     = var.ssh_port
     protocol    = var.protocol
-    cide_blocks = var.cidr_blocks
+    cidr_blocks = var.cidr_blocks
   }
 
-  egress = {
+  egress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
@@ -32,10 +32,10 @@ resource "aws_instance" "db_instance" {
   count                  = length(var.instance_names)
   ami                    = var.image_id
   vpc_security_group_ids = [aws_security_group.Allow_SSH.id]
-  instance_type          = var.instance_tags.name == "DB" ? "t3.medium" : "t3.large"
+  instance_type          = var.instance_names[count.index] == "DB" ? "t3.micro" : "t3.small"
 
   tags = {
-    name = var.instance_names[count.index]
+    Name = var.instance_names[count.index]
   }
 }
 
