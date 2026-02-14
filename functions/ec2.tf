@@ -32,7 +32,7 @@ resource "aws_instance" "db_instance" {
   count                  = length(var.instance_names)
   ami                    = var.image_id
   vpc_security_group_ids = [aws_security_group.Allow_SSH.id]
-  instance_type          = var.instance_names[count.index] == "DB" ? "t3.micro" : "t3.small"
+  instance_type          = var.instance_names[count.index] == "db" ? "t3.micro" : "t3.small"
 
   tags = {
     Name = var.instance_names[count.index]
