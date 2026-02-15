@@ -29,23 +29,13 @@ resource "aws_security_group" "Allow_SSH" {
 
 # Creating an EC2 instance.
 resource "aws_instance" "db_instance" {
-  # count = length(var.instance_names)
-
-  # Getting the value by looping through the map defined in the variable.tf.
   ami                    = data.aws_ami.ami_id.id
   vpc_security_group_ids = [aws_security_group.Allow_SSH.id]
-  # instance_type          = var.instance_names[count.index] == "frontend" ? "t2.micro" : "t3.medium"
-  # Getting the instance type from the for-each loop.
-  # instance_type = each.value
-  instance_type = lookup(var.instance_type, terraform.workspace)
-  # instance_type          = local.instance_type
+  instance_type          = var.instance_type
   tags = merge(
     var.instance_tags,
     {
-      # Getting the name from for-each loop.
-      Name        = "${each.key}"
-      Module      = "${each.key}"
-      Environment = var.environment
+
     }
   )
 
@@ -60,11 +50,11 @@ resource "aws_instance" "db_instance" {
 
   # remote provisioner to install the ansible and then run the ansible-playbook to install the nginx once the instance is created.
   provisioner "remote-exec" {
-    inline = [ 
+    inline = [
       "sudo dnf install ansible -y",
       "ansible-playbook -i private-ips.txt nginx.yml",
       "sudo systemctl start nginx"
-     ]
+    ]
   }
 }
 

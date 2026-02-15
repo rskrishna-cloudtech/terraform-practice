@@ -1,29 +1,29 @@
 # Variable to store the instance names.
-variable "instance_type" {
-  type = map
+variable "instance_names" {
+  type = map(any)
   default = {
-    dev = "t3.small"
+    dev  = "t3.small"
     prod = "t3.micro"
   }
   description = "List of instance names"
 }
 
-# Variable to store the default environment name.
-variable "environment" {
-  # default = "dev"
-}
+# # Variable to store the default environment name.
+# variable "environment" {
+#   # default = "dev"
+# }
 
-# Variable to store the AMI id.
-variable "image_id" {
-  type        = string
-  default     = "ami-090252cbe067a9e58"
-  description = "The AMI ID for the EC2 instance"
-}
+# # Variable to store the AMI id.
+# variable "image_id" {
+#   type        = string
+#   default     = "ami-090252cbe067a9e58"
+#   description = "The AMI ID for the EC2 instance"
+# }
 
 # Variable to store the instance type.
 variable "instance_type" {
-  type = string
-  # default     = "t2.micro"
+  type        = string
+  default     = "t3.micro"
   description = "The instance type for the EC2 instance"
 }
 
@@ -76,16 +76,16 @@ variable "cidr_blocks" {
 
 # R53 records variables
 # Variable to store the zone_id of the r53 record.
-variable "zone_id" {
-  type = string
-  # Copy the zone if from the R5 record from AWS console. Route 53 --> Hosted zones --> <domain-name> --> Hosted zone details.
-  default     = "Z0717631Z7LUOW4UR5SA"
-  description = "The zone ID for the Route53 record"
-}
+# variable "zone_id" {
+#   type = string
+#   # Copy the zone if from the R5 record from AWS console. Route 53 --> Hosted zones --> <domain-name> --> Hosted zone details.
+#   default     = "Z0717631Z7LUOW4UR5SA"
+#   description = "The zone ID for the Route53 record"
+# }
 
-# Variable to store the record name of the r53 record.
-variable "record_name" {
-  type        = string
-  default     = "rskrishnacloudtech.onlin"
-  description = "The record name for the Route53 record"
-}
+# # Variable to store the record name of the r53 record.
+# variable "record_name" {
+#   type        = string
+#   default     = "rskrishnacloudtech.onlin"
+#   description = "The record name for the Route53 record"
+# }

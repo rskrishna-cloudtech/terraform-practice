@@ -1,29 +1,29 @@
 # Variable to store the instance names.
-variable "instance_type" {
-  type = map
+variable "instance_names" {
+  type = map(any)
   default = {
-    dev = "t3.small"
+    dev  = "t3.small"
     prod = "t3.micro"
   }
   description = "List of instance names"
 }
 
-# Variable to store the default environment name.
-variable "environment" {
-  # default = "dev"
-}
+# # Variable to store the default environment name.
+# variable "environment" {
+#   # default = "dev"
+# }
 
 # Variable to store the AMI id.
-variable "image_id" {
-  type        = string
-  default     = "ami-090252cbe067a9e58"
-  description = "The AMI ID for the EC2 instance"
-}
+# variable "image_id" {
+#   type        = string
+#   default     = "ami-090252cbe067a9e58"
+#   description = "The AMI ID for the EC2 instance"
+# }
 
 # Variable to store the instance type.
 variable "instance_type" {
   type = string
-  # default     = "t2.micro"
+  default     = "t3.micro"
   description = "The instance type for the EC2 instance"
 }
 
