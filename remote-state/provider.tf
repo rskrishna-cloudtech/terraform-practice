@@ -5,12 +5,12 @@ terraform {
       version = "5.50.0"
     }
   }
-  
+
   backend "s3" {
-    bucket = "<s3-bucket-name>"
-    key = "<remote-state-file-name>"
-    region = "us-east-1"
-    dynamodb_table = "<dynamoDB-table-name>"
+    bucket         = "daws-my-pract-s3-remote-state"
+    key            = "remote-state-demo"
+    region         = "us-east-1"
+    dynamodb_table = "daws-my-pract-remote-state-lock"
   }
 }
 
