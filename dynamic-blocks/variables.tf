@@ -12,14 +12,14 @@ variable "instance_names" {
 # Variable to store the AMI id.
 variable "image_id" {
   type        = string
-  default     = "ami-090252cbe067a9e58"
+  default     = "ami-0220d79f3f480ecf5"
   description = "The AMI ID for the EC2 instance"
 }
 
 # Variable to store the instance type.
 variable "instance_type" {
-  type = string
-  # default     = "t2.micro"
+  type        = string
+  default     = ""
   description = "The instance type for the EC2 instance"
 }
 
@@ -71,7 +71,7 @@ variable "cidr_blocks" {
 
 # Variable to store the list of sg details to open the mutliple ports for inbound.
 variable "inbound_rules" {
-  type = list
+  type = list(any)
   default = [
     {
       port         = 22
