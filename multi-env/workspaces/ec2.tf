@@ -2,18 +2,18 @@
 # Inbound - Allow everything or only the port 22 for SSh connection.
 # Outbounf - Allow everything.
 
-resource "aws_security_group" "Allow_SSH" {
+resource "aws_security_group" "Allow_SSH_dev" {
   name        = var.sg_name
   description = var.sg_description
 
-  ingress = {
+  ingress {
     from_port   = var.ssh_port
     to_port     = var.ssh_port
     protocol    = var.protocol
-    cide_blocks = var.cidr_blocks
+    cidr_blocks = var.cidr_blocks
   }
 
-  egress = {
+  egress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
@@ -21,31 +21,22 @@ resource "aws_security_group" "Allow_SSH" {
   }
 
   tags = {
-    Name      = "allow_ssh"
+    Name      = "allow_ssh_dev"
     CreatedBy = "Siva Krishna"
   }
 
 }
 
 # Creating an EC2 instance.
-resource "aws_instance" "db_instance" {
-  # count = length(var.instance_names)
-
-  # Getting the value by looping through the map defined in the variable.tf.
+resource "aws_instance" "instances" {
   ami                    = data.aws_ami.ami_id.id
-  vpc_security_group_ids = [aws_security_group.Allow_SSH.id]
-  # instance_type          = var.instance_names[count.index] == "frontend" ? "t2.micro" : "t3.medium"
-  # Getting the instance type from the for-each loop.
-  # instance_type = each.value
-  instance_type = lookup(var.instance_type, terraform.workspace)
-  # instance_type          = local.instance_type
+  vpc_security_group_ids = [aws_security_group.Allow_SSH_dev.id]
+  instance_type          = lookup(var.instance_names, terraform.workspace)
   tags = merge(
     var.instance_tags,
     {
-      # Getting the name from for-each loop.
-      Name        = "${each.key}"
-      Module      = "${each.key}"
-      Environment = var.environment
+      Name        = terraform.workspace
+      Environment = terraform.workspace
     }
   )
 }

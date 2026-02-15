@@ -7,10 +7,10 @@ terraform {
   }
 
   backend "s3" {
-    bucket         = "<s3-bucket-name>"
-    key            = "<remote-state-file-name>"
+    bucket         = "daws-my-pract-s3-remote-state"
+    key            = "remote-state-multi-env-workspace"
     region         = "us-east-1"
-    dynamodb_table = "<dynamoDB-table-name>"
+    dynamodb_table = "daws-my-pract-remote-state-lock"
   }
 }
 

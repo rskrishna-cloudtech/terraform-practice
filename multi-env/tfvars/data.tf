@@ -5,7 +5,7 @@ data "aws_ami" "ami_id" {
 
   filter {
     name   = "name"
-    values = ["RHEL-9-DevOps-Practice"]
+    values = ["Redhat-9-DevOps-Practice"]
   }
 
   filter {
@@ -22,4 +22,11 @@ data "aws_ami" "ami_id" {
 # Data source to get the default vpc id in the given region.
 data "aws_vpc" "def_vpc_id" {
   default = true
+}
+
+
+# Data source to get the hosted zone id.
+data "aws_route53_zone" "hosted_zone_id" {
+  name         = "rskrishnacloudtech.online"
+  private_zone = false
 }

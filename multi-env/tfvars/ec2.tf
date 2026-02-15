@@ -6,14 +6,14 @@ resource "aws_security_group" "Allow_SSH" {
   name        = var.sg_name
   description = var.sg_description
 
-  ingress = {
+  ingress {
     from_port   = var.ssh_port
     to_port     = var.ssh_port
     protocol    = var.protocol
-    cide_blocks = var.cidr_blocks
+    cidr_blocks = var.cidr_blocks
   }
 
-  egress = {
+  egress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
@@ -28,7 +28,7 @@ resource "aws_security_group" "Allow_SSH" {
 }
 
 # Creating an EC2 instance.
-resource "aws_instance" "db_instance" {
+resource "aws_instance" "expense_instances" {
   # count = length(var.instance_names)
 
   # Getting the value by looping through the map defined in the variable.tf.
