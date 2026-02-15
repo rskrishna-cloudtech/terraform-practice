@@ -5,17 +5,17 @@ variable "instance_names" {
   description = "List of instance names"
 }
 
-# Variable to store the AMI id.
-variable "image_id" {
-  type        = string
-  default     = "ami-090252cbe067a9e58"
-  description = "The AMI ID for the EC2 instance"
-}
+# # Variable to store the AMI id.
+# variable "image_id" {
+#   type        = string
+#   default     = "ami-0220d79f3f480ecf5"
+#   description = "The AMI ID for the EC2 instance"
+# }
 
 # Variable to store the instance type.
 variable "instance_type" {
-  type = string
-  # default     = "t2.micro"
+  type        = string
+  default     = ""
   description = "The instance type for the EC2 instance"
 }
 
