@@ -42,12 +42,12 @@ resource "aws_instance" "db_instance" {
   # Provisioners will run when the resources are getting created.
   # local provisioner to get the private_ip address of the instance.
   provisioner "local-exec" {
-    command = "echo ${self.private_ip} > private-ips.txt"
+    command = "echo ${self.public_ip} > public-ips.txt"
   }
 
   # local provisioner to run the ansible-playbook to install the nginx once the instance is created.
   provisioner "local-exec" {
-    command = "ansible-playbook -i private-ips.txt nginx.yml"
+    command = "sleep 500 && ansible-playbook -i public-ips.txt nginx.yml"
   }
 }
 
