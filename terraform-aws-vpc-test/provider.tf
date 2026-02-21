@@ -7,10 +7,10 @@ terraform {
   }
 
   backend "s3" {
-    bucket         = "<s3-bucket-name>"
-    key            = "<remote-state-file-name>"
+    bucket         = "expense-project-state"
+    key            = "expense-project-state-file"
     region         = "us-east-1"
-    dynamodb_table = "<dynamoDB-table-name>"
+    dynamodb_table = "expense-project-state-lock"
   }
 }
 
