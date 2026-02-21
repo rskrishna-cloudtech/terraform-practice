@@ -76,16 +76,16 @@ variable "cidr_blocks" {
 
 # R53 records variables
 # Variable to store the zone_id of the r53 record.
-variable "zone_id" {
-  type = string
-  # Copy the zone if from the R5 record from AWS console. Route 53 --> Hosted zones --> <domain-name> --> Hosted zone details.
-  default     = "Z0717631Z7LUOW4UR5SA"
-  description = "The zone ID for the Route53 record"
-}
+# variable "zone_id" {
+#   type = string
+#   # Copy the zone if from the R5 record from AWS console. Route 53 --> Hosted zones --> <domain-name> --> Hosted zone details.
+#   default     = "Z0717631Z7LUOW4UR5SA"
+#   description = "The zone ID for the Route53 record"
+# }
 
-# Variable to store the record name of the r53 record.
-variable "record_name" {
-  type        = string
-  default     = "rskrishnacloudtech.onlin"
-  description = "The record name for the Route53 record"
-}
+# # Variable to store the record name of the r53 record.
+# variable "record_name" {
+#   type        = string
+#   default     = "rskrishnacloudtech.onlin"
+#   description = "The record name for the Route53 record"
+# }
