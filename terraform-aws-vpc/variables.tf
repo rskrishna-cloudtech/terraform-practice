@@ -44,7 +44,7 @@ variable "public_subnet_cidrs" {
 
   validation {
     condition     = length(var.public_subnet_cidrs) == 2
-    error_message = "Please provide valid public subnet CIDR "
+    error_message = "Please provide valid number of public subnet CIDRs"
   }
 }
 

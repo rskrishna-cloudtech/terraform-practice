@@ -8,7 +8,7 @@ resource "aws_vpc" "main" {
     var.common_tags,
     var.vpc_tags,
     {
-      Name = locals.resource_name
+      Name = local.resource_name
     }
   )
 }
@@ -22,7 +22,7 @@ resource "aws_internet_gateway" "igw" {
     var.common_tags,
     var.igw_tags,
     {
-      Name = locals.resource_name
+      Name = local.resource_name
     }
   )
 }
@@ -78,19 +78,19 @@ resource "aws_subnet" "database" {
 }
 
 
-# Resource to crate the database subnet group.
-resource "aws_db_subnet_group" "default" {
-  name       = local.resource_name
-  subnet_ids = aws_subnet.databse[*].id
+# # Resource to create the database subnet group.
+# resource "aws_db_subnet_group" "default" {
+#   name       = local.resource_name
+#   subnet_ids = aws_subnet.database[*].id
 
-  tags = merge(
-    var.common_tags,
-    var.database_subnet_cidr_tags,
-    {
-      Name = "${local.resource_name}"
-    }
-  )
-}
+#   tags = merge(
+#     var.common_tags,
+#     var.database_subnet_cidr_tags,
+#     {
+#       Name = "${local.resource_name}"
+#     }
+#   )
+# }
 
 # Resource to create the elastic IP.
 resource "aws_eip" "nat" {
@@ -110,7 +110,7 @@ resource "aws_nat_gateway" "nat" {
     }
   )
 
-  depends_on = [aws_interest_gateway.igw]
+  depends_on = [aws_internet_gateway.igw]
 }
 
 # Resource to crate the public route table.
