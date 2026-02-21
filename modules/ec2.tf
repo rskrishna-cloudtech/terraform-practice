@@ -3,7 +3,9 @@
 module "aws_ec2" {
   source = "../module-source"
 
-  tags = {
+  instance_type = "t3.small"
+
+  instance_tags = {
     Name = "Terraform Module"
   }
 }
