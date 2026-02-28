@@ -29,7 +29,7 @@ resource "aws_security_group" "allow_tls" {
     var.common_tags,
     var.sg_tags,
     {
-      Name = loca.sg_name
+      Name = local.sg_name
     }
   )
 }
