@@ -79,18 +79,18 @@ resource "aws_subnet" "database" {
 
 
 # # Resource to create the database subnet group.
-# resource "aws_db_subnet_group" "default" {
-#   name       = local.resource_name
-#   subnet_ids = aws_subnet.database[*].id
+resource "aws_db_subnet_group" "default" {
+  name       = local.resource_name
+  subnet_ids = aws_subnet.database[*].id
 
-#   tags = merge(
-#     var.common_tags,
-#     var.database_subnet_cidr_tags,
-#     {
-#       Name = "${local.resource_name}"
-#     }
-#   )
-# }
+  tags = merge(
+    var.common_tags,
+    var.database_subnet_cidr_tags,
+    {
+      Name = "${local.resource_name}"
+    }
+  )
+}
 
 # Resource to create the elastic IP.
 resource "aws_eip" "nat" {
