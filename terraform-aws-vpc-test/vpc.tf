@@ -1,10 +1,12 @@
 # Terraform module to call source resource file.
 module "aws-vpc" {
-  source                = "../terraform-aws-vpc"
+  # This is the source file path to call the resource file from the local system.
+  # source                = "../terraform-aws-vpc"
 
   # To get the source file form the github repo.
-  # source = "<github-url-of-repo>"
-  
+  # source = "<github-url-of-repo?ref=<git-branch-name>>"
+  source = "git::https://github.com/rskrishna-cloudtech/terraform-practice.git//terraform-aws-vpc?ref=main"
+
   project_name          = var.project_name
   common_tags           = var.common_tags
   public_subnet_cidrs   = var.public_subnet_cidrs
